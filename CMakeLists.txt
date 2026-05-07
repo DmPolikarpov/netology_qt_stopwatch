@@ -32,6 +32,8 @@ if(ANDROID)
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    stopwatch.cpp
+    stopwatch.h
   )
 else()
   add_executable(netology_qt_stopwatch
@@ -39,6 +41,8 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    stopwatch.cpp
+    stopwatch.h
   )
 endif()
 
