@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // create stopwatch
+    stopwatch = new Stopwatch(this);
+
     // set titles and labels
     setWindowTitle("Секундомер");
     ui->lbl_main->setText("Секундомер");
@@ -26,3 +29,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_btn_start_clicked()
+{
+    if (stopwatch->isRunning()) {
+        stopwatch->stop();
+        ui->btn_start->setText("Старт");
+        ui->btn_lap->setEnabled(false);
+    } else {
+        stopwatch->start();
+        ui->btn_start->setText("Стоп");
+        ui->btn_lap->setEnabled(true);
+    }
+}

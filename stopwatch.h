@@ -1,11 +1,21 @@
 #ifndef STOPWATCH_H
 #define STOPWATCH_H
 
+#include <QObject>
 
-class stopwatch
+class Stopwatch : public QObject
 {
+    Q_OBJECT
 public:
-    stopwatch();
+    explicit Stopwatch(QObject *parent = nullptr);
+
+    bool isRunning() const;
+
+    void start();
+    void stop();
+
+private:
+    bool is_running;
 };
 
 #endif // STOPWATCH_H

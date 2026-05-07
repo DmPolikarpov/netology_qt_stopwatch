@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "stopwatch.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -15,7 +17,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_btn_start_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    Stopwatch *stopwatch;
 };
 #endif // MAINWINDOW_H
