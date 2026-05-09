@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->btn_lap->setEnabled(false);
     ui->tb_records->hide();
 
+    // setup connections
+    connect(stopwatch, &Stopwatch::timeChanged, this, &MainWindow::updateTimeDisplay);
+
 }
 
 MainWindow::~MainWindow()
@@ -41,4 +44,17 @@ void MainWindow::on_btn_start_clicked()
         ui->btn_start->setText("Стоп");
         ui->btn_lap->setEnabled(true);
     }
+}
+
+void MainWindow::updateTimeDisplay(qint64 ms)
+{
+    int min = ms / 60000;
+    int sec = (ms % 60000) / 1000;
+    int hdr = (ms % 1000) / 10;
+
+    QString text = QString("%1.%2.%3")
+                       .arg(min, 2, 10, QLatin1Char('0'))
+                       .arg(sec, 2, 10, QLatin1Char('0'))
+                       .arg(hdr, 2, 10, QLatin1Char('0'));
+    ui->lbl_stopwatch->setText(text);
 }

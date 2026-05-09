@@ -19,6 +19,7 @@ public:
 
 private slots:
     void on_btn_start_clicked();
+    void updateTimeDisplay(qint64 ms);
 
 private:
     Ui::MainWindow *ui;
