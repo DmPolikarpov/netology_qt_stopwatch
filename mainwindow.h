@@ -21,9 +21,15 @@ private slots:
     void on_btn_start_clicked();
     void updateTimeDisplay(qint64 ms);
 
+    void on_btn_reset_clicked();
+
+    void on_btn_lap_clicked();
+
+    void addLapRecord(int lapNumber, qint64 lapTime);
+
 private:
     Ui::MainWindow *ui;
 
     Stopwatch *stopwatch;
 };
-#endif // MAINWINDOW_H
+#endif

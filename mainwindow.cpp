@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // setup connections
     connect(stopwatch, &Stopwatch::timeChanged, this, &MainWindow::updateTimeDisplay);
+    connect(stopwatch, &Stopwatch::lapCompleted, this, &MainWindow::addLapRecord);
 
 }
 
@@ -57,4 +58,31 @@ void MainWindow::updateTimeDisplay(qint64 ms)
                        .arg(sec, 2, 10, QLatin1Char('0'))
                        .arg(hdr, 2, 10, QLatin1Char('0'));
     ui->lbl_stopwatch->setText(text);
+}
+
+void MainWindow::on_btn_reset_clicked()
+{
+    stopwatch->reset();
+    ui->lbl_stopwatch->setText("00.00.00");
+    ui->tb_records->clear();
+    ui->tb_records->hide();
+    ui->btn_start->setText("Старт");
+    ui->btn_lap->setEnabled(false);
+}
+
+void MainWindow::on_btn_lap_clicked()
+{
+    stopwatch->lap();
+}
+
+void MainWindow::addLapRecord(int lapNumber, qint64 lapTime)
+{
+    QString record = QString("Круг %1, время: %2 сек")
+                         .arg(lapNumber)
+                         .arg(QString::number(lapTime/1000, 'f', 1));
+    if (ui->tb_records->isHidden())
+    {
+        ui->tb_records->show();
+    };
+    ui->tb_records->append(record);
 }
